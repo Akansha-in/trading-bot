@@ -30,6 +30,7 @@ trading_bot/
 - Input validation with clear error messages
 - All API requests and responses logged to `logs/bot.log`
 - Error handling for API errors, network failures, and invalid input
+- Interactive menu mode when running `python cli.py` with no arguments
 
 ---
 
@@ -50,11 +51,10 @@ pip install requests
 
 ### 3. Get Binance Testnet API credentials
 
-1. Go to [testnet.binance.com](https://testnet.binance.com)
+1. Go to [testnet.binancefuture.com](https://testnet.binancefuture.com)
 2. Log in with Google
 3. Find the **API Key** section on the dashboard
-4. Click **Generate** — copy both the API Key and Secret immediately
-   (Secret is shown only once)
+4. Click **Generate** and copy both the API Key and Secret immediately
 
 ### 4. Set your API keys
 
@@ -70,10 +70,15 @@ export BINANCE_TESTNET_API_KEY="your_api_key_here"
 export BINANCE_TESTNET_API_SECRET="your_api_secret_here"
 ```
 
-
 ---
 
 ## How to Run
+
+### Interactive menu (no arguments needed)
+```powershell
+python cli.py
+```
+Launches a step-by-step menu to place orders without typing arguments.
 
 ### Place a MARKET order
 ```powershell
@@ -99,21 +104,3 @@ python cli.py --symbol ETHUSDT --side BUY --type LIMIT --quantity 0.05 --price 3
 ## Logs
 
 Every order request and response is automatically saved to `logs/bot.log`.
-
-Example log entry:
-```
-2026-06-01 14:02:11 | INFO | Placing order: BTCUSDT | BUY | MARKET | qty=0.001 | price=None
-2026-06-01 14:02:12 | INFO | Response: {'orderId': 4751923810, 'status': 'FILLED', 'executedQty': '0.001', 'avgPrice': '67432.10000'}
-```
-
----
-
-## All CLI Arguments
-
-| Argument   | Required          | Description                              |
-|------------|-------------------|------------------------------------------|
-| --symbol   | Yes               | Trading pair, must end in USDT. Example: BTCUSDT |
-| --side     | Yes               | BUY or SELL                              |
-| --type     | Yes               | MARKET or LIMIT                          |
-| --quantity | Yes               | Amount to trade                          |
-| --price    | Only for LIMIT    | Limit price                              |
